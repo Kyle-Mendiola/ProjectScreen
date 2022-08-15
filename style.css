@@ -1,0 +1,38 @@
+html, body{
+    background: black;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+.tablet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: min-content;
+    gap: 2rem 4rem;
+    background: #44ff90;
+    border-radius: 10px;
+    height: min-content;
+    min-height: 400px;
+    padding: 4% 5%;
+}
+
+.tablet .app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.app .icon {
+    background: cornflowerblue;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.app .name {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
+}
