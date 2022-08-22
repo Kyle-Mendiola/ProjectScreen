@@ -10,9 +10,9 @@ html, body{
     gap: 2rem 4rem;
     background: #44ff90;
     border-radius: 10px;
-    height: min-content;
+    height: 100vh;
     min-height: 400px;
-    padding: 10% 5%;
+    padding: 2em 5%;
 }
 
 .tablet .app {
