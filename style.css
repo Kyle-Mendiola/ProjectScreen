@@ -63,4 +63,5 @@ html, body {
     justify-content: center;
     overflow: visible;
     text-overflow: initial;
+    white-space: initial;
 }
