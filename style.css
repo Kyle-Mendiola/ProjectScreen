@@ -19,13 +19,13 @@ html, body {
     border-radius: 10px;
     height: 93vh;
     min-height: 400px;
-    padding-top: 2em;
+    padding-top: 2.5em;
 }
 
 .tablet .app-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-auto-rows: min-content;
+    grid-auto-rows: 100px;
     gap: 2rem 4rem;
     margin: 0 5%;
 }
@@ -63,7 +63,7 @@ html, body {
     justify-content: center;
     overflow: visible;
     text-overflow: initial;
-    white-space: initial;
+    white-space: normal;
 }
 
 .tablet .toolbar {
