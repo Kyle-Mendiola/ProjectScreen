@@ -1,6 +1,14 @@
+/* TODO 
+    - When hovering on an app with a long name,
+    make it so that it will not affect the
+    position of the apps below it.
+
+*/
 html, body {
     background: rgb(240, 166, 178);
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,
+        Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,
+        Helvetica Neue,sans-serif;
 }
 
 .tablet {
@@ -20,14 +28,6 @@ html, body {
     grid-auto-rows: min-content;
     gap: 2rem 4rem;
     margin: 0 5%;
-}
-
-.tablet .toolbar {
-    margin-top: auto;
-    width: 100%;
-    height: 6%;
-    background: black;
-    overflow: hidden;
 }
 
 .app-section .app {
@@ -64,4 +64,21 @@ html, body {
     overflow: visible;
     text-overflow: initial;
     white-space: initial;
+}
+
+.tablet .toolbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: auto;
+    width: 100%;
+    height: 6%;
+    background: black;
+}
+
+.toolbar .button {
+    border: 2px solid white;
+    height: 1.8em;
+    width: 1.8em;
+    border-radius: 50%;
 }
