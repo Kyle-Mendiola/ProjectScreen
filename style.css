@@ -55,6 +55,7 @@ html, body {
     text-overflow: ellipsis;
     white-space: nowrap;
     user-select: none;
+    transition: padding .3s;
 }
 
 .app:hover .name {
