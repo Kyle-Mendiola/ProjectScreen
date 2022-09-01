@@ -24,6 +24,18 @@ html, body {
     box-shadow: rgba(0, 0, 0, 0.60) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.tab-background{
+    /* background-color: #23ce67; */
+    background-color: #44ff90;
+    background-size: 45px 45px;
+    background-image: radial-gradient(
+        transparent 28px,
+        #ffffff 28px,
+        #ffffff 32px,
+        transparent 32px
+    );
+}
+
 .tablet .app-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -96,16 +108,4 @@ html, body {
     height: 1.8em;
     width: 1.8em;
     border-radius: 50%;
-}
-
-.tab-background{
-    /* background-color: #23ce67; */
-    background-color: #44ff90;
-    background-size: 45px 45px;
-    background-image: radial-gradient(
-        transparent 28px,
-        #ffffff 28px,
-        #ffffff 32px,
-        transparent 32px
-    );
 }
