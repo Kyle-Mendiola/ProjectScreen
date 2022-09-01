@@ -12,20 +12,6 @@ html, body {
     margin: 0;
 }
 
-/* .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    height: 100vh;
-    width: 100vw;
-    background-color: #0d3744;
-    opacity: 0.8;
-    background-image:  linear-gradient(30deg, #44ff90 12%, transparent 12.5%, transparent 87%, #44ff90 87.5%, #44ff90), linear-gradient(150deg, #44ff90 12%, transparent 12.5%, transparent 87%, #44ff90 87.5%, #44ff90), linear-gradient(30deg, #44ff90 12%, transparent 12.5%, transparent 87%, #44ff90 87.5%, #44ff90), linear-gradient(150deg, #44ff90 12%, transparent 12.5%, transparent 87%, #44ff90 87.5%, #44ff90), linear-gradient(60deg, #44ff9077 25%, transparent 25.5%, transparent 75%, #44ff9077 75%, #44ff9077), linear-gradient(60deg, #44ff9077 25%, transparent 25.5%, transparent 75%, #44ff9077 75%, #44ff9077);
-    background-size: 24px 42px;
-    background-position: 0 0, 0 0, 12px 21px, 12px 21px, 0 0, 12px 21px;
-} */
-
 .tablet {
     display: flex;
     flex-direction: column;
@@ -37,7 +23,6 @@ html, body {
         #ffffff 32px,
         transparent 32px
     );
-
     border: 35px solid black;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.60) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -60,6 +45,8 @@ html, body {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: min-content;
+    margin: 0 auto;
 }
 
 .app-section .app:hover .icon {
