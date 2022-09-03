@@ -11,7 +11,12 @@ window.onload = function() {
 
     for (let index = 0; index < apps.length; index++) {
         appSection.appendChild(createApp(apps[index]))
-    }   
+    }
+}
+
+function showSettings() {
+    document.querySelector(".settings").style.display = "block"
+    console.log("HEjkhj")
 }
 
 function createApp(name) {
