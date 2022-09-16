@@ -3,20 +3,30 @@ const apps = [
     "App with an even longer name",
     "App with an long even longer longer name",
     "App name",
+    "App name",
     "App name"
 ]
 
 window.onload = function() {
     const appSection = document.querySelector(".app-section")
+    const settingsDiv = document.querySelector(".settings")
 
-    for (let index = 0; index < apps.length; index++) {
-        appSection.appendChild(createApp(apps[index]))
+    settingsDiv.addEventListener('blur', (event) => {
+        settingsDiv.style.display = 'none'
+    }, true)
+
+    for (const app of apps) {
+        appSection.appendChild(createApp(app))
     }
+
+    const gridCompProps = window.getComputedStyle(appSection)
+    const gridColumnCount = gridCompProps.getPropertyValue("grid-template-columns").split(" ").length
 }
 
 function showSettings() {
-    document.querySelector(".settings").style.display = "block"
-    console.log("HEjkhj")
+    const settingsDiv = document.querySelector(".settings")
+    settingsDiv.style.display = "block"
+    settingsDiv.focus()
 }
 
 function createApp(name) {
