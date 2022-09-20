@@ -19,7 +19,6 @@ const appNames = [
 ]
 
 const appList = []
-let currentPageNumber = 0
 
 for (const appName of appNames) {
     appList.push(createApp(appName))
@@ -37,14 +36,23 @@ window.onload = function() {
 
     for (let i = 0; i < appPartition.length; i++) {
         let appSection = createAppSection(i)
+
         fillAppSection(appSection, appPartition[i])
+
         appScroll.appendChild(appSection)
     }
+
+    createNavButtons(appPartition.length)
 
 }
 
 window.onresize = function() {
     // console.log("hey");
+}
+
+function scrollToAppSection(id) {
+    const f = document.getElementById(`app-section-${id}`)
+    f.scrollIntoView({behavior: "smooth"})
 }
 
 function showSettings() {
@@ -69,21 +77,53 @@ function createApp(name) {
     return appDiv
 }
 
-function changeAppPage(targetPageNumber) {
-    const currentPage = getChunkedArray(appList, 2)[currentPageNumber]
-    const targetPage = getChunkedArray(appList, 2)[targetPageNumber]
+function createNavButtons(n) {
+    const nav = document.querySelector("div.nav")
+
+    for (let i = 0; i < n; i++) {
+        const btn = document.createElement("button")
+        btn.className = "nav"
+        btn.id = `btn-${i}`
+        btn.onclick = function () {
+            const activeBtn = document.querySelector("button.nav.active")
+            if(activeBtn){
+                activeBtn.classList.toggle("active")
+            }
+            btn.classList.toggle("active")
+            scrollToAppSection(i)
+        }
+        nav.appendChild(btn)
+    }
 }
 
 function createAppSection(id) {
     let appSection = document.createElement('div')
     appSection.className = "app-section"
-    appSection.id = id
+    appSection.id = `app-section-${id}`
     return appSection
 }
 
+/** Fills a div with apps. 
+ *  If # of apps are less than the needed amount
+ *  to completely fill a row, add invisible divs
+ *  to complete it.
+ * 
+ * @param  {div} appSection - the div to be filled with apps
+ * @param  {array} apps - list of apps to be added
+ */
 function fillAppSection(appSection, apps) {
     for (let app of apps) {
         appSection.appendChild(app)
+    }
+    
+    const maxColCount = getColumnCount()
+    if (apps.length >= maxColCount) {
+        return
+    }
+    const noOfPlaceholderApps = maxColCount - apps.length
+
+    for (let j = 0; j < noOfPlaceholderApps; j++) {
+        appSection.appendChild(document.createElement('div'))
     }
 }
 
@@ -103,7 +143,7 @@ function getColumnCount() {
     else if (window.innerWidth >= 342) {
         return 2
     }
-    else if (window.innerWidth < 342){
+    else if (window.innerWidth < 342) {
         return 1
     }
     // const appSection = document.querySelector(".app-section")
