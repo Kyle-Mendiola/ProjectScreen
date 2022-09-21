@@ -19,6 +19,7 @@ const appNames = [
 ]
 
 const appList = []
+const currentPage = 0
 
 for (const appName of appNames) {
     appList.push(createApp(appName))
@@ -57,7 +58,9 @@ function scrollToAppSection(id) {
 
 function showSettings() {
     const settingsDiv = document.querySelector(".settings")
+    settingsDiv.classList.toggle("slide-in")
     settingsDiv.style.display = "block"
+    settingsDiv.style.bottom = 0
     settingsDiv.focus()
 }
 
@@ -82,7 +85,9 @@ function createNavButtons(n) {
 
     for (let i = 0; i < n; i++) {
         const btn = document.createElement("button")
-        btn.className = "nav"
+        btn.className = i === 0 
+            ? "nav active" 
+            : "nav"
         btn.id = `btn-${i}`
         btn.onclick = function () {
             const activeBtn = document.querySelector("button.nav.active")
