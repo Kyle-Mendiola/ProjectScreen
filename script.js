@@ -13,13 +13,13 @@ const appNames = [
 
 const appList = []
 const currentPage = 0
+let firstApp = null
 
 for (const appName of appNames) {
     appList.push(createApp(appName))
 }
 
 window.onload = function() {
-    const appScroll = document.querySelector(".appScroll")
     const settingsDiv = document.querySelector(".settings")
 
     settingsDiv.addEventListener('blur', (event) => {
@@ -35,6 +35,35 @@ window.onresize = function() {
     scrollToAppSection(0)
 }
 
+function createAppSection(id) {
+    let appSection = document.createElement('div')
+    appSection.className = "app-section"
+    appSection.id = `app-section-${id}`
+    return appSection
+}
+
+/** Fills a div with apps. 
+ *  If # of apps are less than the needed amount
+ *  to completely fill a row, add invisible divs
+ *  to complete it.
+ * 
+ * @param  {div} appSection - the div to be filled with apps
+ * @param  {array} apps - list of apps to be added
+ */
+function fillAppSection(appSection, apps) {
+    appSection.replaceChildren(...apps)
+    
+    const maxColCount = getColumnCount()
+    if (apps.length >= maxColCount) {
+        return
+    }
+    const noOfPlaceholderApps = maxColCount - apps.length
+
+    for (let j = 0; j < noOfPlaceholderApps; j++) {
+        appSection.appendChild(document.createElement('div'))
+    }
+}
+
 function scrollToAppSection(id, options={}) {
     const f = document.getElementById(`app-section-${id}`)
     if(options){
@@ -44,28 +73,24 @@ function scrollToAppSection(id, options={}) {
     f.scrollIntoView()
 }
 
-function showSettings() {
-    const settingsDiv = document.querySelector(".settings")
-    settingsDiv.classList.toggle("slide-in")
-    settingsDiv.style.display = "block"
-    settingsDiv.style.bottom = 0
-    settingsDiv.focus()
-}
+function arrangeAppPartition() {
+    const appScroll = document.querySelector(".appScroll")
+    const appPartition = [...getChunkedArray([...appList], getMaxAppCount())]
 
-function createApp(name) {
-    let appDiv = document.createElement('div')
-    let iconDiv = document.createElement('div')
-    let nameContainer = document.createElement('span')
+    firstApp = appPartition[0][0]
 
-    appDiv.className = "app"
-    iconDiv.className = "icon"
-    nameContainer.className = "name"
+    for (let i = 0; i < appPartition.length; i++) {
+        let appSection = document.getElementById(`app-section-${i}`)
+        if (!appSection) {
+            appSection = createAppSection(i)
+        }
 
-    appDiv.appendChild(iconDiv)
-    iconDiv.appendChild(nameContainer)
-    nameContainer.innerHTML = name
+        fillAppSection(appSection, appPartition[i])
 
-    return appDiv
+        appScroll.appendChild(appSection)
+    }
+
+    createNavButtons(appPartition.length)
 }
 
 function createNavButtons(n) {
@@ -99,51 +124,36 @@ function createNavButtons(n) {
     }
 }
 
-function createAppSection(id) {
-    let appSection = document.createElement('div')
-    appSection.className = "app-section"
-    appSection.id = `app-section-${id}`
-    return appSection
+function navBtnHandler(btn, pageNo) {
+    const activeBtn = document.querySelector("button.nav.active")
+    if(activeBtn){
+        activeBtn.classList.toggle("active")
+    }
+    btn.classList.toggle("active")
+    scrollToAppSection(pageNo, {behavior: "smooth"})
 }
 
-/** Fills a div with apps. 
- *  If # of apps are less than the needed amount
- *  to completely fill a row, add invisible divs
- *  to complete it.
- * 
- * @param  {div} appSection - the div to be filled with apps
- * @param  {array} apps - list of apps to be added
- */
-function fillAppSection(appSection, apps) {
-    appSection.replaceChildren(...apps)
-    
-    const maxColCount = getColumnCount()
-    if (apps.length >= maxColCount) {
-        return
-    }
-    const noOfPlaceholderApps = maxColCount - apps.length
+function createApp(name) {
+    let appDiv = document.createElement('div')
+    let iconDiv = document.createElement('div')
+    let nameContainer = document.createElement('span')
 
-    for (let j = 0; j < noOfPlaceholderApps; j++) {
-        appSection.appendChild(document.createElement('div'))
-    }
+    appDiv.className = "app"
+    iconDiv.className = "icon"
+    nameContainer.className = "name"
+
+    appDiv.appendChild(iconDiv)
+    iconDiv.appendChild(nameContainer)
+    nameContainer.innerHTML = name
+
+    return appDiv
 }
 
-function arrangeAppPartition() {
-    const appScroll = document.querySelector(".appScroll")
-    const appPartition = [...getChunkedArray([...appList], getMaxAppCount())]
 
-    for (let i = 0; i < appPartition.length; i++) {
-        let appSection = document.getElementById(`app-section-${i}`)
-        if (!appSection) {
-            appSection = createAppSection(i)
-        }
-
-        fillAppSection(appSection, appPartition[i])
-
-        appScroll.appendChild(appSection)
-    }
-
-    createNavButtons(appPartition.length)
+function showSettings() {
+    const settingsDiv = document.querySelector(".settings")
+    settingsDiv.style.display = "block"
+    settingsDiv.focus()
 }
 
 function* getChunkedArray(arr, n) {
@@ -180,29 +190,8 @@ function getColumnCount() {
     else if (window.innerWidth < 342) {
         return 1
     }
-    // const appSection = document.querySelector(".app-section")
-    // const gridCompProps = window.getComputedStyle(appSection)
-    // const gridColumnCount = gridCompProps.getPropertyValue("grid-template-columns").split(" ").length
-    // return gridColumnCount
 }
 
 function getMaxAppCount() {
     return getColumnCount() * getRowCount()
-}
-
-function removeApps(elem) {
-    const aS = document.getElementById(elem)
-    console.log(aS);
-    for(let app of aS.children()){
-        app.remove()
-    }
-}
-
-function navBtnHandler(btn, n) {
-    const activeBtn = document.querySelector("button.nav.active")
-    if(activeBtn){
-        activeBtn.classList.toggle("active")
-    }
-    btn.classList.toggle("active")
-    scrollToAppSection(n, {behavior: "smooth"})
 }
