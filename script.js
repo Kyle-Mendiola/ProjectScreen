@@ -153,10 +153,10 @@ function* getChunkedArray(arr, n) {
 }
 
 function getRowCount(){
-    if (window.innerHeight >= 653) {
+    if (window.innerHeight >= 700) {
         return 4
     }
-    else if (window.innerHeight >= 501) {
+    else if (window.innerHeight >= 520) {
         return 3
     }
     else if (window.innerHeight >= 330) {
