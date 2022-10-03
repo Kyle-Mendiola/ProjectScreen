@@ -28,6 +28,13 @@ window.onload = function() {
 
     arrangeAppPartition()
 
+    // 
+    const appScroll = document.querySelector(".appScroll")
+    appScroll.addEventListener('scroll', (event) => {
+        // console.table(appScroll.firstElementChild.getBoundingClientRect())
+        // console.log(appScroll.firstElementChild.getBoundingClientRect());
+    })
+
 }
 
 window.onresize = function() {
@@ -107,7 +114,6 @@ function createNavButtons(n) {
                 continue
             }
             while (excessBtn) {
-                console.log(excessBtn);
                 nav.lastChild.removeEventListener('click', handler)
                 nav.lastChild.remove()
             }

@@ -37,7 +37,8 @@ html, body {
 }
 
 .tab-background {
-    background-color: #A3EBB1;
+    background-color: #8af49f;
+    /* background-color: #A3EBB1; */
     background-size: 45px 45px;
     background-image: radial-gradient(
         transparent 28px,
@@ -98,7 +99,7 @@ html, body {
 }
 
 .app .icon {
-    background: #21B6A8;
+    background: #3d6094;
     position: relative;
     height: 50px;
     width: 50px;
